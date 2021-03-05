@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Tech Blog</title>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Tech Blog</a>
+                  </div>
+                  <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a href="/post">Post</a></li>
+                      <li class="active"><a href="/post/addPost">Add Post</a></li>
+                      <% if(userdata.role=="Admin"){%>
+                      <li class="active"><a href="/allUsers">Admin</a></li>
+                      <%}%>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="/logout"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+                    </ul>
+                  </div>
+                </div>
+            </nav>
+            <hr/>
+            <div class="row">
+                <div class="col-md-12">
+                    <center>
+                        <h2>Hi <%=userdata.name%> Please Edit your Post</h2>
+                    </center>
+                    <hr/>
+                    <form action="/post/editPost/<%=data._id%>" method="POST">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input name="title" class="form-control" id="title"
+                            value="<%=data.title%>"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input name="description" class="form-control" id="description"
+                            value="<%=data.description%>"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="tags">Tag</label>
+                            <select name="tags">
+                              <option value="JavaScript">JavaScript</option>
+                              <option value="Node">Node</option>
+                              <option value="React">React</option>
+                              <option value="Python">Python</option>
+                            </select>
+                        </div>
+                        <button onClick="this.toggle">True</button>
+                        <p>Created By:<%=data.createBy%> </p>
+                        <button type="submit" class="btn btn-success">Edit Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+//controller
+var express = require('express');
+var postRouter = express.Router();
+const mongodb = require('mongodb');
+
+const url = "mongodb://localhost:27017";
+var mongoClient = new mongodb.MongoClient(url);
+let dbobj;
+mongoClient.connect((err) => {
+    if(err) throw err;
+    dbobj = mongoClient.db('aryablog')
+});
+
+
+function postpage(){
+
+    
+    postRouter.route('/')
+    .get((req,res) => {
+        dbobj.collection('posts').find().toArray((err,data) => {
+            res.send(data)
+        })
+    })
+
+    postRouter.route('/addPost')
+        .post((req,res) => {
+            
+            if(!req.session.user){
+                res.redirect("/?message=No Session Found! Please try again")
+            }
+            let data = {
+                title:req.body.title,
+                description:req.body.description,
+                createBy:req.session.user.name,
+                createrId:req.session.user._id,
+                isActive:true,
+                tags:req.body.tag,
+                date:new Date(Date.now()).toISOString(),
+                lastupdatedate:new Date(Date.now()).toISOString()
+            }
+
+            dbobj.collection('posts').insert(data,(err,result)=>{
+                res.send('data added')
+            })
+    })
+
+    return postRouter;
+}
+
+
+
+module.exports = postpage

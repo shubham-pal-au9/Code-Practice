@@ -1,0 +1,24 @@
+Register
+Login
+blogpage
+    > All Post of every User
+    > Edit /Delete Your own Post
+Edit
+    > load the post data and update button
+Admin
+    > Can edit/delete post from blogpage
+    > can change access of any User
+    > can delete any User
+
+Restrict user not to use app if not loggedIn
+Only admin you can access all pages
+User can access profile/blog/edit
+
+User Profile Page
+
+//////////
+Edit/Update User Profile
+Add comment section in blog post
+
+
+npm i body-parser cors ejs express express-session mongodb
