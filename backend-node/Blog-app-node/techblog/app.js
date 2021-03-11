@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongodb = require('mongodb');
 const session = require('express-session');
 const url = "mongodb://localhost:27017";
-const port = process.env.PORT || 6700;
+const port = 6700;
 //make object of express so that we can use methods
 let app = express();
 let dbobj;
